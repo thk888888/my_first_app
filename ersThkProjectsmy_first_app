@@ -1,0 +1,2270 @@
+[1mdiff --git a/lib/main.dart b/lib/main.dart[m
+[1mindex b4ed682..f961b74 100644[m
+[1m--- a/lib/main.dart[m
+[1m+++ b/lib/main.dart[m
+[36m@@ -1,30 +1,2251 @@[m
+[32m+[m[32m﻿import 'dart:ui';[m
+[32m+[m
+ import 'package:flutter/material.dart';[m
+ [m
+ void main() {[m
+[31m-  runApp(const MyApp());[m
+[32m+[m[32m  runApp(const CertificateApp());[m
+ }[m
+ [m
+[31m-class MyApp extends StatelessWidget {[m
+[31m-  const MyApp({super.key});[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// App[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass CertificateApp extends StatelessWidget {[m
+[32m+[m[32m  const CertificateApp({super.key});[m
+ [m
+   @override[m
+   Widget build(BuildContext context) {[m
+     return MaterialApp([m
+       debugShowCheckedModeBanner: false,[m
+[31m-      home: Scaffold([m
+[31m-        appBar: AppBar([m
+[31m-          title: const Text('HK App'),[m
+[32m+[m[32m      title: '鎴戠殑璇佷功',[m
+[32m+[m[32m      themeMode: ThemeMode.system,[m
+[32m+[m
+[32m+[m[32m      theme: ThemeData([m
+[32m+[m[32m        useMaterial3: true,[m
+[32m+[m[32m        brightness: Brightness.light,[m
+[32m+[m[32m        scaffoldBackgroundColor: const Color(0xFFF5F5F7),[m
+[32m+[m[32m        colorScheme: ColorScheme.fromSeed([m
+[32m+[m[32m          seedColor: const Color(0xFF007AFF),[m
+[32m+[m[32m          brightness: Brightness.light,[m
+         ),[m
+[31m-        body: const Center([m
+[31m-          child: Text([m
+[31m-            '你好！👋',[m
+[31m-            style: TextStyle([m
+[31m-              fontSize: 32,[m
+[31m-              fontWeight: FontWeight.bold,[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m      darkTheme: ThemeData([m
+[32m+[m[32m        useMaterial3: true,[m
+[32m+[m[32m        brightness: Brightness.dark,[m
+[32m+[m[32m        scaffoldBackgroundColor: const Color(0xFF000000),[m
+[32m+[m[32m        colorScheme: ColorScheme.fromSeed([m
+[32m+[m[32m          seedColor: const Color(0xFF0A84FF),[m
+[32m+[m[32m          brightness: Brightness.dark,[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m      home: const CertificateHomePage(),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Certificate Model[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass Certificate {[m
+[32m+[m[32m  String id;[m
+[32m+[m[32m  String title;[m
+[32m+[m[32m  String subtitle;[m
+[32m+[m[32m  String category;[m
+[32m+[m[32m  DateTime date;[m
+[32m+[m[32m  String organization;[m
+[32m+[m[32m  String number;[m
+[32m+[m[32m  String note;[m
+[32m+[m
+[32m+[m[32m  Certificate({[m
+[32m+[m[32m    required this.id,[m
+[32m+[m[32m    required this.title,[m
+[32m+[m[32m    required this.subtitle,[m
+[32m+[m[32m    required this.category,[m
+[32m+[m[32m    required this.date,[m
+[32m+[m[32m    required this.organization,[m
+[32m+[m[32m    required this.number,[m
+[32m+[m[32m    required this.note,[m
+[32m+[m[32m  });[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Home Page[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass CertificateHomePage extends StatefulWidget {[m
+[32m+[m[32m  const CertificateHomePage({super.key});[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  State<CertificateHomePage> createState() =>[m
+[32m+[m[32m      _CertificateHomePageState();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mclass _CertificateHomePageState[m
+[32m+[m[32m    extends State<CertificateHomePage> {[m
+[32m+[m[32m  final List<Certificate> _certificates = [[m
+[32m+[m[32m    Certificate([m
+[32m+[m[32m      id: '1',[m
+[32m+[m[32m      title: '澶у鑻辫鍥涚骇',[m
+[32m+[m[32m      subtitle: 'CET-4',[m
+[32m+[m[32m      category: '鑻辫',[m
+[32m+[m[32m      date: DateTime(2025, 6, 1),[m
+[32m+[m[32m      organization: '鍏ㄥ浗澶у鑻辫鍥涖€佸叚绾ц€冭瘯',[m
+[32m+[m[32m      number: '',[m
+[32m+[m[32m      note: '',[m
+[32m+[m[32m    ),[m
+[32m+[m[32m    Certificate([m
+[32m+[m[32m      id: '2',[m
+[32m+[m[32m      title: '鍏ㄥ浗璁＄畻鏈虹瓑绾ц€冭瘯',[m
+[32m+[m[32m      subtitle: 'MS Office 浜岀骇',[m
+[32m+[m[32m      category: '璁＄畻鏈?,[m
+[32m+[m[32m      date: DateTime(2025, 9, 1),[m
+[32m+[m[32m      organization: '鏁欒偛閮ㄦ暀鑲茶€冭瘯闄?,[m
+[32m+[m[32m      number: '',[m
+[32m+[m[32m      note: '',[m
+[32m+[m[32m    ),[m
+[32m+[m[32m    Certificate([m
+[32m+[m[32m      id: '3',[m
+[32m+[m[32m      title: '鏅€氳瘽姘村钩娴嬭瘯',[m
+[32m+[m[32m      subtitle: '浜岀骇鐢茬瓑',[m
+[32m+[m[32m      category: '涓撲笟',[m
+[32m+[m[32m      date: DateTime(2025, 5, 1),[m
+[32m+[m[32m      organization: '鍥藉鏅€氳瘽姘村钩娴嬭瘯',[m
+[32m+[m[32m      number: '',[m
+[32m+[m[32m      note: '',[m
+[32m+[m[32m    ),[m
+[32m+[m[32m  ];[m
+[32m+[m
+[32m+[m[32m  String _searchText = '';[m
+[32m+[m
+[32m+[m[32m  Color _primaryColor(bool isDark) {[m
+[32m+[m[32m    return isDark[m
+[32m+[m[32m        ? const Color(0xFF0A84FF)[m
+[32m+[m[32m        : const Color(0xFF007AFF);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  List<Certificate> get _filteredCertificates {[m
+[32m+[m[32m    if (_searchText.trim().isEmpty) {[m
+[32m+[m[32m      return _certificates;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    final keyword = _searchText.trim().toLowerCase();[m
+[32m+[m
+[32m+[m[32m    return _certificates.where((certificate) {[m
+[32m+[m[32m      return certificate.title[m
+[32m+[m[32m              .toLowerCase()[m
+[32m+[m[32m              .contains(keyword) ||[m
+[32m+[m[32m          certificate.subtitle[m
+[32m+[m[32m              .toLowerCase()[m
+[32m+[m[32m              .contains(keyword) ||[m
+[32m+[m[32m          certificate.category[m
+[32m+[m[32m              .toLowerCase()[m
+[32m+[m[32m              .contains(keyword) ||[m
+[32m+[m[32m          certificate.organization[m
+[32m+[m[32m              .toLowerCase()[m
+[32m+[m[32m              .contains(keyword);[m
+[32m+[m[32m    }).toList();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  int _categoryCount(String category) {[m
+[32m+[m[32m    return _certificates[m
+[32m+[m[32m        .where((certificate) => certificate.category == category)[m
+[32m+[m[32m        .length;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _addCertificate() async {[m
+[32m+[m[32m    final result = await Navigator.of(context).push<Certificate>([m
+[32m+[m[32m      MaterialPageRoute([m
+[32m+[m[32m        builder: (_) => const AddCertificatePage(),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (result == null) return;[m
+[32m+[m
+[32m+[m[32m    setState(() {[m
+[32m+[m[32m      _certificates.insert(0, result);[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _openCertificate(Certificate certificate) async {[m
+[32m+[m[32m    final result =[m
+[32m+[m[32m        await Navigator.of(context).push<CertificateDetailResult>([m
+[32m+[m[32m      MaterialPageRoute([m
+[32m+[m[32m        builder: (_) => CertificateDetailPage([m
+[32m+[m[32m          certificate: certificate,[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (result == null) return;[m
+[32m+[m
+[32m+[m[32m    setState(() {[m
+[32m+[m[32m      if (result.deleted) {[m
+[32m+[m[32m        _certificates.removeWhere([m
+[32m+[m[32m          (item) => item.id == certificate.id,[m
+[32m+[m[32m        );[m
+[32m+[m[32m      } else if (result.updatedCertificate != null) {[m
+[32m+[m[32m        final index = _certificates.indexWhere([m
+[32m+[m[32m          (item) => item.id == certificate.id,[m
+[32m+[m[32m        );[m
+[32m+[m
+[32m+[m[32m        if (index != -1) {[m
+[32m+[m[32m          _certificates[index] =[m
+[32m+[m[32m              result.updatedCertificate!;[m
+[32m+[m[32m        }[m
+[32m+[m[32m      }[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    final theme = Theme.of(context);[m
+[32m+[m[32m    final isDark = theme.brightness == Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    final primaryColor = _primaryColor(isDark);[m
+[32m+[m
+[32m+[m[32m    final textColor = isDark[m
+[32m+[m[32m        ? Colors.white[m
+[32m+[m[32m        : const Color(0xFF1D1D1F);[m
+[32m+[m
+[32m+[m[32m    final secondaryTextColor = isDark[m
+[32m+[m[32m        ? Colors.white60[m
+[32m+[m[32m        : const Color(0xFF6E6E73);[m
+[32m+[m
+[32m+[m[32m    final certificates = _filteredCertificates;[m
+[32m+[m
+[32m+[m[32m    return Scaffold([m
+[32m+[m[32m      extendBody: true,[m
+[32m+[m
+[32m+[m[32m      body: CustomScrollView([m
+[32m+[m[32m        physics: const BouncingScrollPhysics(),[m
+[32m+[m
+[32m+[m[32m        slivers: [[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m[32m          // Navigation Bar[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m
+[32m+[m[32m          SliverAppBar([m
+[32m+[m[32m            backgroundColor: isDark[m
+[32m+[m[32m                ? Colors.black.withValues(alpha: 0.78)[m
+[32m+[m[32m                : Colors.white.withValues(alpha: 0.78),[m
+[32m+[m
+[32m+[m[32m            surfaceTintColor: Colors.transparent,[m
+[32m+[m
+[32m+[m[32m            elevation: 0,[m
+[32m+[m
+[32m+[m[32m            pinned: true,[m
+[32m+[m
+[32m+[m[32m            expandedHeight: 110,[m
+[32m+[m
+[32m+[m[32m            flexibleSpace: FlexibleSpaceBar([m
+[32m+[m[32m              titlePadding: const EdgeInsets.only([m
+[32m+[m[32m                left: 20,[m
+[32m+[m[32m                bottom: 14,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              title: Text([m
+[32m+[m[32m                '鎴戠殑璇佷功',[m
+[32m+[m[32m                style: TextStyle([m
+[32m+[m[32m                  fontSize: 20,[m
+[32m+[m[32m                  fontWeight: FontWeight.w700,[m
+[32m+[m[32m                  color: textColor,[m
+[32m+[m[32m                  letterSpacing: -0.4,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            actions: [[m
+[32m+[m[32m              Padding([m
+[32m+[m[32m                padding: const EdgeInsets.only(right: 16),[m
+[32m+[m[32m                child: _GlassButton([m
+[32m+[m[32m                  icon: Icons.settings_outlined,[m
+[32m+[m[32m                  onTap: () {},[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ],[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m[32m          // Main Content[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m
+[32m+[m[32m          SliverPadding([m
+[32m+[m[32m            padding: const EdgeInsets.fromLTRB([m
+[32m+[m[32m              20,[m
+[32m+[m[32m              24,[m
+[32m+[m[32m              20,[m
+[32m+[m[32m              120,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            sliver: SliverList([m
+[32m+[m[32m              delegate: SliverChildListDelegate([m
+[32m+[m[32m                [[m
+[32m+[m[32m                  // ------------------------------------------------[m
+[32m+[m[32m                  // Header[m
+[32m+[m[32m                  // ------------------------------------------------[m
+[32m+[m
+[32m+[m[32m                  Text([m
+[32m+[m[32m                    '澶у鏈熼棿',[m
+[32m+[m[32m                    style: TextStyle([m
+[32m+[m[32m                      fontSize: 17,[m
+[32m+[m[32m                      fontWeight: FontWeight.w500,[m
+[32m+[m[32m                      color: secondaryTextColor,[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 4),[m
+[32m+[m
+[32m+[m[32m                  Text([m
+[32m+[m[32m                    '鎴戣幏寰椾簡',[m
+[32m+[m[32m                    style: TextStyle([m
+[32m+[m[32m                      fontSize: 36,[m
+[32m+[m[32m                      fontWeight: FontWeight.w800,[m
+[32m+[m[32m                      color: textColor,[m
+[32m+[m[32m                      letterSpacing: -1.5,[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 8),[m
+[32m+[m
+[32m+[m[32m                  Row([m
+[32m+[m[32m                    crossAxisAlignment: CrossAxisAlignment.end,[m
+[32m+[m[32m                    children: [[m
+[32m+[m[32m                      Text([m
+[32m+[m[32m                        '${_certificates.length}',[m
+[32m+[m[32m                        style: TextStyle([m
+[32m+[m[32m                          fontSize: 64,[m
+[32m+[m[32m                          height: 0.95,[m
+[32m+[m[32m                          fontWeight: FontWeight.w800,[m
+[32m+[m[32m                          color: primaryColor,[m
+[32m+[m[32m                          letterSpacing: -3,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m
+[32m+[m[32m                      const SizedBox(width: 10),[m
+[32m+[m
+[32m+[m[32m                      Padding([m
+[32m+[m[32m                        padding: const EdgeInsets.only([m
+[32m+[m[32m                          bottom: 7,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                        child: Text([m
+[32m+[m[32m                          '椤硅瘉涔?,[m
+[32m+[m[32m                          style: TextStyle([m
+[32m+[m[32m                            fontSize: 20,[m
+[32m+[m[32m                            fontWeight: FontWeight.w600,[m
+[32m+[m[32m                            color: secondaryTextColor,[m
+[32m+[m[32m                          ),[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 28),[m
+[32m+[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m[32m                  // Categories[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m
+[32m+[m[32m                  Row([m
+[32m+[m[32m                    children: [[m
+[32m+[m[32m                      Expanded([m
+[32m+[m[32m                        child: _CategoryCard([m
+[32m+[m[32m                          icon: Icons.language_rounded,[m
+[32m+[m[32m                          title: '鑻辫',[m
+[32m+[m[32m                          count: '${_categoryCount('鑻辫')}',[m
+[32m+[m[32m                          color: primaryColor,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m
+[32m+[m[32m                      const SizedBox(width: 12),[m
+[32m+[m
+[32m+[m[32m                      Expanded([m
+[32m+[m[32m                        child: _CategoryCard([m
+[32m+[m[32m                          icon: Icons.computer_rounded,[m
+[32m+[m[32m                          title: '璁＄畻鏈?,[m
+[32m+[m[32m                          count: '${_categoryCount('璁＄畻鏈?)}',[m
+[32m+[m[32m                          color: primaryColor,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m                  Row([m
+[32m+[m[32m                    children: [[m
+[32m+[m[32m                      Expanded([m
+[32m+[m[32m                        child: _CategoryCard([m
+[32m+[m[32m                          icon: Icons.school_rounded,[m
+[32m+[m[32m                          title: '涓撲笟',[m
+[32m+[m[32m                          count: '${_categoryCount('涓撲笟')}',[m
+[32m+[m[32m                          color: primaryColor,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m
+[32m+[m[32m                      const SizedBox(width: 12),[m
+[32m+[m
+[32m+[m[32m                      Expanded([m
+[32m+[m[32m                        child: _CategoryCard([m
+[32m+[m[32m                          icon: Icons.more_horiz_rounded,[m
+[32m+[m[32m                          title: '鍏朵粬',[m
+[32m+[m[32m                          count: '${_categoryCount('鍏朵粬')}',[m
+[32m+[m[32m                          color: primaryColor,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 34),[m
+[32m+[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m[32m                  // Search[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m
+[32m+[m[32m                  _SearchBar([m
+[32m+[m[32m                    isDark: isDark,[m
+[32m+[m[32m                    onChanged: (value) {[m
+[32m+[m[32m                      setState(() {[m
+[32m+[m[32m                        _searchText = value;[m
+[32m+[m[32m                      });[m
+[32m+[m[32m                    },[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 28),[m
+[32m+[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m[32m                  // Certificate Header[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m
+[32m+[m[32m                  Row([m
+[32m+[m[32m                    mainAxisAlignment:[m
+[32m+[m[32m                        MainAxisAlignment.spaceBetween,[m
+[32m+[m
+[32m+[m[32m                    children: [[m
+[32m+[m[32m                      Text([m
+[32m+[m[32m                        '鎴戠殑璇佷功',[m
+[32m+[m[32m                        style: TextStyle([m
+[32m+[m[32m                          fontSize: 26,[m
+[32m+[m[32m                          fontWeight: FontWeight.w700,[m
+[32m+[m[32m                          color: textColor,[m
+[32m+[m[32m                          letterSpacing: -0.8,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m
+[32m+[m[32m                      Text([m
+[32m+[m[32m                        '${certificates.length} 椤?,[m
+[32m+[m[32m                        style: TextStyle([m
+[32m+[m[32m                          fontSize: 14,[m
+[32m+[m[32m                          fontWeight: FontWeight.w500,[m
+[32m+[m[32m                          color: secondaryTextColor,[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                    ],[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m[32m                  // Certificate List[m
+[32m+[m[32m                  // ==================================================[m
+[32m+[m
+[32m+[m[32m                  if (certificates.isEmpty)[m
+[32m+[m[32m                    _EmptyState([m
+[32m+[m[32m                      isDark: isDark,[m
+[32m+[m[32m                      onAdd: _addCertificate,[m
+[32m+[m[32m                    )[m
+[32m+[m[32m                  else[m
+[32m+[m[32m                    ...certificates.map([m
+[32m+[m[32m                      (certificate) {[m
+[32m+[m[32m                        return Padding([m
+[32m+[m[32m                          padding:[m
+[32m+[m[32m                              const EdgeInsets.only(bottom: 14),[m
+[32m+[m
+[32m+[m[32m                          child: _CertificateCard([m
+[32m+[m[32m                            certificate: certificate,[m
+[32m+[m[32m                            isDark: isDark,[m
+[32m+[m[32m                            iconColor: primaryColor,[m
+[32m+[m[32m                            onTap: () {[m
+[32m+[m[32m                              _openCertificate(certificate);[m
+[32m+[m[32m                            },[m
+[32m+[m[32m                          ),[m
+[32m+[m[32m                        );[m
+[32m+[m[32m                      },[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ],[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m      // ==================================================[m
+[32m+[m[32m      // Add Button[m
+[32m+[m[32m      // ==================================================[m
+[32m+[m
+[32m+[m[32m      floatingActionButton: _GlassAddButton([m
+[32m+[m[32m        primaryColor: primaryColor,[m
+[32m+[m[32m        onTap: _addCertificate,[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Add Certificate Page[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass AddCertificatePage extends StatefulWidget {[m
+[32m+[m[32m  final Certificate? certificate;[m
+[32m+[m
+[32m+[m[32m  const AddCertificatePage({[m
+[32m+[m[32m    super.key,[m
+[32m+[m[32m    this.certificate,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  State<AddCertificatePage> createState() =>[m
+[32m+[m[32m      _AddCertificatePageState();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mclass _AddCertificatePageState[m
+[32m+[m[32m    extends State<AddCertificatePage> {[m
+[32m+[m[32m  final _formKey = GlobalKey<FormState>();[m
+[32m+[m
+[32m+[m[32m  late final TextEditingController _titleController;[m
+[32m+[m[32m  late final TextEditingController _subtitleController;[m
+[32m+[m[32m  late final TextEditingController _organizationController;[m
+[32m+[m[32m  late final TextEditingController _numberController;[m
+[32m+[m[32m  late final TextEditingController _noteController;[m
+[32m+[m
+[32m+[m[32m  String _category = '鍏朵粬';[m
+[32m+[m
+[32m+[m[32m  DateTime _date = DateTime.now();[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  void initState() {[m
+[32m+[m[32m    super.initState();[m
+[32m+[m
+[32m+[m[32m    final certificate = widget.certificate;[m
+[32m+[m
+[32m+[m[32m    _titleController = TextEditingController([m
+[32m+[m[32m      text: certificate?.title ?? '',[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    _subtitleController = TextEditingController([m
+[32m+[m[32m      text: certificate?.subtitle ?? '',[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    _organizationController = TextEditingController([m
+[32m+[m[32m      text: certificate?.organization ?? '',[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    _numberController = TextEditingController([m
+[32m+[m[32m      text: certificate?.number ?? '',[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    _noteController = TextEditingController([m
+[32m+[m[32m      text: certificate?.note ?? '',[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (certificate != null) {[m
+[32m+[m[32m      _category = certificate.category;[m
+[32m+[m[32m      _date = certificate.date;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  void dispose() {[m
+[32m+[m[32m    _titleController.dispose();[m
+[32m+[m[32m    _subtitleController.dispose();[m
+[32m+[m[32m    _organizationController.dispose();[m
+[32m+[m[32m    _numberController.dispose();[m
+[32m+[m[32m    _noteController.dispose();[m
+[32m+[m
+[32m+[m[32m    super.dispose();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _selectDate() async {[m
+[32m+[m[32m    final selected = await showDatePicker([m
+[32m+[m[32m      context: context,[m
+[32m+[m[32m      initialDate: _date,[m
+[32m+[m[32m      firstDate: DateTime(2000),[m
+[32m+[m[32m      lastDate: DateTime(2100),[m
+[32m+[m[32m      locale: const Locale('zh', 'CN'),[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (selected != null) {[m
+[32m+[m[32m      setState(() {[m
+[32m+[m[32m        _date = selected;[m
+[32m+[m[32m      });[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  void _save() {[m
+[32m+[m[32m    if (!_formKey.currentState!.validate()) {[m
+[32m+[m[32m      return;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    final certificate = Certificate([m
+[32m+[m[32m      id: widget.certificate?.id ??[m
+[32m+[m[32m          DateTime.now()[m
+[32m+[m[32m              .microsecondsSinceEpoch[m
+[32m+[m[32m              .toString(),[m
+[32m+[m
+[32m+[m[32m      title: _titleController.text.trim(),[m
+[32m+[m
+[32m+[m[32m      subtitle: _subtitleController.text.trim(),[m
+[32m+[m
+[32m+[m[32m      category: _category,[m
+[32m+[m
+[32m+[m[32m      date: _date,[m
+[32m+[m
+[32m+[m[32m      organization:[m
+[32m+[m[32m          _organizationController.text.trim(),[m
+[32m+[m
+[32m+[m[32m      number: _numberController.text.trim(),[m
+[32m+[m
+[32m+[m[32m      note: _noteController.text.trim(),[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    Navigator.pop(context, certificate);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    final isDark =[m
+[32m+[m[32m        Theme.of(context).brightness == Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    final primaryColor = isDark[m
+[32m+[m[32m        ? const Color(0xFF0A84FF)[m
+[32m+[m[32m        : const Color(0xFF007AFF);[m
+[32m+[m
+[32m+[m[32m    final isEditing = widget.certificate != null;[m
+[32m+[m
+[32m+[m[32m    return Scaffold([m
+[32m+[m[32m      appBar: AppBar([m
+[32m+[m[32m        title: Text([m
+[32m+[m[32m          isEditing ? '缂栬緫璇佷功' : '娣诲姞璇佷功',[m
+[32m+[m[32m          style: const TextStyle([m
+[32m+[m[32m            fontWeight: FontWeight.w700,[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        backgroundColor: Colors.transparent,[m
+[32m+[m
+[32m+[m[32m        surfaceTintColor: Colors.transparent,[m
+[32m+[m
+[32m+[m[32m        elevation: 0,[m
+[32m+[m
+[32m+[m[32m        actions: [[m
+[32m+[m[32m          TextButton([m
+[32m+[m[32m            onPressed: _save,[m
+[32m+[m[32m            child: Text([m
+[32m+[m[32m              '淇濆瓨',[m
+[32m+[m[32m              style: TextStyle([m
+[32m+[m[32m                color: primaryColor,[m
+[32m+[m[32m                fontWeight: FontWeight.w700,[m
+[32m+[m[32m                fontSize: 16,[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ],[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m      body: SafeArea([m
+[32m+[m[32m        child: Form([m
+[32m+[m[32m          key: _formKey,[m
+[32m+[m
+[32m+[m[32m          child: ListView([m
+[32m+[m[32m            physics: const BouncingScrollPhysics(),[m
+[32m+[m
+[32m+[m[32m            padding: const EdgeInsets.fromLTRB([m
+[32m+[m[32m              20,[m
+[32m+[m[32m              10,[m
+[32m+[m[32m              20,[m
+[32m+[m[32m              40,[m
+             ),[m
+[32m+[m
+[32m+[m[32m            children: [[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m[32m              // Basic Information[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m
+[32m+[m[32m              _SectionTitle([m
+[32m+[m[32m                title: '鍩烘湰淇℃伅',[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m              _FormCard([m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m
+[32m+[m[32m                children: [[m
+[32m+[m[32m                  _TextField([m
+[32m+[m[32m                    controller: _titleController,[m
+[32m+[m[32m                    label: '璇佷功鍚嶇О',[m
+[32m+[m[32m                    hint: '渚嬪锛氬ぇ瀛﹁嫳璇洓绾?,[m
+[32m+[m[32m                    icon: Icons.workspace_premium_outlined,[m
+[32m+[m[32m                    validator: (value) {[m
+[32m+[m[32m                      if (value == null ||[m
+[32m+[m[32m                          value.trim().isEmpty) {[m
+[32m+[m[32m                        return '璇疯緭鍏ヨ瘉涔﹀悕绉?;[m
+[32m+[m[32m                      }[m
+[32m+[m
+[32m+[m[32m                      return null;[m
+[32m+[m[32m                    },[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 16),[m
+[32m+[m
+[32m+[m[32m                  _TextField([m
+[32m+[m[32m                    controller: _subtitleController,[m
+[32m+[m[32m                    label: '璇佷功绠€绉?/ 绛夌骇',[m
+[32m+[m[32m                    hint: '渚嬪锛欳ET-4',[m
+[32m+[m[32m                    icon: Icons.label_outline_rounded,[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 16),[m
+[32m+[m
+[32m+[m[32m                  _TextField([m
+[32m+[m[32m                    controller: _organizationController,[m
+[32m+[m[32m                    label: '棰佸彂鏈烘瀯',[m
+[32m+[m[32m                    hint: '渚嬪锛氭暀鑲查儴鏁欒偛鑰冭瘯闄?,[m
+[32m+[m[32m                    icon: Icons.account_balance_outlined,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 28),[m
+[32m+[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m[32m              // Category[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m
+[32m+[m[32m              _SectionTitle([m
+[32m+[m[32m                title: '璇佷功鍒嗙被',[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m              _FormCard([m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m
+[32m+[m[32m                children: [[m
+[32m+[m[32m                  DropdownButtonFormField<String>([m
+[32m+[m[32m                    value: _category,[m
+[32m+[m
+[32m+[m[32m                    decoration: InputDecoration([m
+[32m+[m[32m                      labelText: '鍒嗙被',[m
+[32m+[m[32m                      prefixIcon: const Icon([m
+[32m+[m[32m                        Icons.category_outlined,[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                      border: InputBorder.none,[m
+[32m+[m[32m                    ),[m
+[32m+[m
+[32m+[m[32m                    items: const [[m
+[32m+[m[32m                      DropdownMenuItem([m
+[32m+[m[32m                        value: '鑻辫',[m
+[32m+[m[32m                        child: Text('鑻辫'),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                      DropdownMenuItem([m
+[32m+[m[32m                        value: '璁＄畻鏈?,[m
+[32m+[m[32m                        child: Text('璁＄畻鏈?),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                      DropdownMenuItem([m
+[32m+[m[32m                        value: '涓撲笟',[m
+[32m+[m[32m                        child: Text('涓撲笟'),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                      DropdownMenuItem([m
+[32m+[m[32m                        value: '鍏朵粬',[m
+[32m+[m[32m                        child: Text('鍏朵粬'),[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                    ],[m
+[32m+[m
+[32m+[m[32m                    onChanged: (value) {[m
+[32m+[m[32m                      if (value == null) return;[m
+[32m+[m
+[32m+[m[32m                      setState(() {[m
+[32m+[m[32m                        _category = value;[m
+[32m+[m[32m                      });[m
+[32m+[m[32m                    },[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 28),[m
+[32m+[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m[32m              // Date[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m
+[32m+[m[32m              _SectionTitle([m
+[32m+[m[32m                title: '鑾峰緱鏃堕棿',[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m              _FormCard([m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m
+[32m+[m[32m                children: [[m
+[32m+[m[32m                  InkWell([m
+[32m+[m[32m                    borderRadius:[m
+[32m+[m[32m                        BorderRadius.circular(18),[m
+[32m+[m
+[32m+[m[32m                    onTap: _selectDate,[m
+[32m+[m
+[32m+[m[32m                    child: Padding([m
+[32m+[m[32m                      padding:[m
+[32m+[m[32m                          const EdgeInsets.symmetric([m
+[32m+[m[32m                        vertical: 8,[m
+[32m+[m[32m                      ),[m
+[32m+[m
+[32m+[m[32m                      child: Row([m
+[32m+[m[32m                        children: [[m
+[32m+[m[32m                          const Icon([m
+[32m+[m[32m                            Icons.calendar_today_outlined,[m
+[32m+[m[32m                          ),[m
+[32m+[m
+[32m+[m[32m                          const SizedBox(width: 14),[m
+[32m+[m
+[32m+[m[32m                          Expanded([m
+[32m+[m[32m                            child: Column([m
+[32m+[m[32m                              crossAxisAlignment:[m
+[32m+[m[32m                                  CrossAxisAlignment.start,[m
+[32m+[m
+[32m+[m[32m                              children: [[m
+[32m+[m[32m                                Text([m
+[32m+[m[32m                                  '鑾峰緱鏃ユ湡',[m
+[32m+[m[32m                                  style: TextStyle([m
+[32m+[m[32m                                    fontSize: 13,[m
+[32m+[m[32m                                    color: isDark[m
+[32m+[m[32m                                        ? Colors.white60[m
+[32m+[m[32m                                        : Colors.black54,[m
+[32m+[m[32m                                  ),[m
+[32m+[m[32m                                ),[m
+[32m+[m
+[32m+[m[32m                                const SizedBox(height: 3),[m
+[32m+[m
+[32m+[m[32m                                Text([m
+[32m+[m[32m                                  _formatDate(_date),[m
+[32m+[m[32m                                  style: const TextStyle([m
+[32m+[m[32m                                    fontSize: 16,[m
+[32m+[m[32m                                    fontWeight:[m
+[32m+[m[32m                                        FontWeight.w600,[m
+[32m+[m[32m                                  ),[m
+[32m+[m[32m                                ),[m
+[32m+[m[32m                              ],[m
+[32m+[m[32m                            ),[m
+[32m+[m[32m                          ),[m
+[32m+[m
+[32m+[m[32m                          Icon([m
+[32m+[m[32m                            Icons.chevron_right_rounded,[m
+[32m+[m[32m                            color: isDark[m
+[32m+[m[32m                                ? Colors.white38[m
+[32m+[m[32m                                : Colors.black26,[m
+[32m+[m[32m                          ),[m
+[32m+[m[32m                        ],[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 28),[m
+[32m+[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m[32m              // More Information[m
+[32m+[m[32m              // ==================================================[m
+[32m+[m
+[32m+[m[32m              _SectionTitle([m
+[32m+[m[32m                title: '鏇村淇℃伅',[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m              _FormCard([m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m
+[32m+[m[32m                children: [[m
+[32m+[m[32m                  _TextField([m
+[32m+[m[32m                    controller: _numberController,[m
+[32m+[m[32m                    label: '璇佷功缂栧彿',[m
+[32m+[m[32m                    hint: '鍙€?,[m
+[32m+[m[32m                    icon: Icons.numbers_outlined,[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(height: 16),[m
+[32m+[m
+[32m+[m[32m                  _TextField([m
+[32m+[m[32m                    controller: _noteController,[m
+[32m+[m[32m                    label: '澶囨敞',[m
+[32m+[m[32m                    hint: '鍙€?,[m
+[32m+[m[32m                    icon: Icons.notes_outlined,[m
+[32m+[m[32m                    maxLines: 4,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 36),[m
+[32m+[m
+[32m+[m[32m              FilledButton([m
+[32m+[m[32m                onPressed: _save,[m
+[32m+[m
+[32m+[m[32m                style: FilledButton.styleFrom([m
+[32m+[m[32m                  minimumSize:[m
+[32m+[m[32m                      const Size.fromHeight(54),[m
+[32m+[m
+[32m+[m[32m                  shape: RoundedRectangleBorder([m
+[32m+[m[32m                    borderRadius:[m
+[32m+[m[32m                        BorderRadius.circular(18),[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  backgroundColor: primaryColor,[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m                child: Text([m
+[32m+[m[32m                  isEditing ? '淇濆瓨淇敼' : '娣诲姞璇佷功',[m
+[32m+[m[32m                  style: const TextStyle([m
+[32m+[m[32m                    fontSize: 16,[m
+[32m+[m[32m                    fontWeight: FontWeight.w700,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ],[m
+           ),[m
+         ),[m
+       ),[m
+     );[m
+   }[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Certificate Detail Result[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass CertificateDetailResult {[m
+[32m+[m[32m  final Certificate? updatedCertificate;[m
+[32m+[m[32m  final bool deleted;[m
+[32m+[m
+[32m+[m[32m  CertificateDetailResult({[m
+[32m+[m[32m    this.updatedCertificate,[m
+[32m+[m[32m    this.deleted = false,[m
+[32m+[m[32m  });[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Certificate Detail Page[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass CertificateDetailPage extends StatelessWidget {[m
+[32m+[m[32m  final Certificate certificate;[m
+[32m+[m
+[32m+[m[32m  const CertificateDetailPage({[m
+[32m+[m[32m    super.key,[m
+[32m+[m[32m    required this.certificate,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  Future<void> _edit(BuildContext context) async {[m
+[32m+[m[32m    final updated =[m
+[32m+[m[32m        await Navigator.of(context).push<Certificate>([m
+[32m+[m[32m      MaterialPageRoute([m
+[32m+[m[32m        builder: (_) => AddCertificatePage([m
+[32m+[m[32m          certificate: certificate,[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (updated == null) return;[m
+[32m+[m
+[32m+[m[32m    if (!context.mounted) return;[m
+[32m+[m
+[32m+[m[32m    Navigator.pop([m
+[32m+[m[32m      context,[m
+[32m+[m[32m      CertificateDetailResult([m
+[32m+[m[32m        updatedCertificate: updated,[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _delete(BuildContext context) async {[m
+[32m+[m[32m    final isDark =[m
+[32m+[m[32m        Theme.of(context).brightness == Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    final confirmed = await showDialog<bool>([m
+[32m+[m[32m      context: context,[m
+[32m+[m
+[32m+[m[32m      builder: (context) {[m
+[32m+[m[32m        return AlertDialog([m
+[32m+[m[32m          title: const Text('鍒犻櫎璇佷功锛?),[m
+[32m+[m
+[32m+[m[32m          content: const Text([m
+[32m+[m[32m            '鍒犻櫎鍚庤繖椤硅瘉涔︾殑淇℃伅灏嗕粠褰撳墠 App 涓Щ闄ゃ€?,[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          actions: [[m
+[32m+[m[32m            TextButton([m
+[32m+[m[32m              onPressed: () {[m
+[32m+[m[32m                Navigator.pop(context, false);[m
+[32m+[m[32m              },[m
+[32m+[m[32m              child: const Text('鍙栨秷'),[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            TextButton([m
+[32m+[m[32m              onPressed: () {[m
+[32m+[m[32m                Navigator.pop(context, true);[m
+[32m+[m[32m              },[m
+[32m+[m
+[32m+[m[32m              child: Text([m
+[32m+[m[32m                '鍒犻櫎',[m
+[32m+[m[32m                style: TextStyle([m
+[32m+[m[32m                  color: isDark[m
+[32m+[m[32m                      ? Colors.redAccent[m
+[32m+[m[32m                      : Colors.red,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ],[m
+[32m+[m[32m        );[m
+[32m+[m[32m      },[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    if (confirmed != true) return;[m
+[32m+[m
+[32m+[m[32m    if (!context.mounted) return;[m
+[32m+[m
+[32m+[m[32m    Navigator.pop([m
+[32m+[m[32m      context,[m
+[32m+[m[32m      CertificateDetailResult([m
+[32m+[m[32m        deleted: true,[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    final isDark =[m
+[32m+[m[32m        Theme.of(context).brightness == Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    final primaryColor = isDark[m
+[32m+[m[32m        ? const Color(0xFF0A84FF)[m
+[32m+[m[32m        : const Color(0xFF007AFF);[m
+[32m+[m
+[32m+[m[32m    final textColor = isDark[m
+[32m+[m[32m        ? Colors.white[m
+[32m+[m[32m        : const Color(0xFF1D1D1F);[m
+[32m+[m
+[32m+[m[32m    final secondaryTextColor = isDark[m
+[32m+[m[32m        ? Colors.white60[m
+[32m+[m[32m        : const Color(0xFF6E6E73);[m
+[32m+[m
+[32m+[m[32m    return Scaffold([m
+[32m+[m[32m      appBar: AppBar([m
+[32m+[m[32m        title: const Text([m
+[32m+[m[32m          '璇佷功璇︽儏',[m
+[32m+[m[32m          style: TextStyle([m
+[32m+[m[32m            fontWeight: FontWeight.w700,[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        backgroundColor: Colors.transparent,[m
+[32m+[m
+[32m+[m[32m        surfaceTintColor: Colors.transparent,[m
+[32m+[m
+[32m+[m[32m        elevation: 0,[m
+[32m+[m
+[32m+[m[32m        actions: [[m
+[32m+[m[32m          IconButton([m
+[32m+[m[32m            onPressed: () {[m
+[32m+[m[32m              _edit(context);[m
+[32m+[m[32m            },[m
+[32m+[m
+[32m+[m[32m            icon: const Icon([m
+[32m+[m[32m              Icons.edit_outlined,[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          IconButton([m
+[32m+[m[32m            onPressed: () {[m
+[32m+[m[32m              _delete(context);[m
+[32m+[m[32m            },[m
+[32m+[m
+[32m+[m[32m            icon: const Icon([m
+[32m+[m[32m              Icons.delete_outline_rounded,[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          const SizedBox(width: 8),[m
+[32m+[m[32m        ],[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m      body: ListView([m
+[32m+[m[32m        physics: const BouncingScrollPhysics(),[m
+[32m+[m
+[32m+[m[32m        padding: const EdgeInsets.fromLTRB([m
+[32m+[m[32m          20,[m
+[32m+[m[32m          12,[m
+[32m+[m[32m          20,[m
+[32m+[m[32m          40,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        children: [[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m[32m          // Certificate Header[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m
+[32m+[m[32m          _DetailHeroCard([m
+[32m+[m[32m            certificate: certificate,[m
+[32m+[m[32m            primaryColor: primaryColor,[m
+[32m+[m[32m            isDark: isDark,[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          const SizedBox(height: 24),[m
+[32m+[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m[32m          // Information[m
+[32m+[m[32m          // ==================================================[m
+[32m+[m
+[32m+[m[32m          Text([m
+[32m+[m[32m            '璇佷功淇℃伅',[m
+[32m+[m[32m            style: TextStyle([m
+[32m+[m[32m              fontSize: 24,[m
+[32m+[m[32m              fontWeight: FontWeight.w700,[m
+[32m+[m[32m              color: textColor,[m
+[32m+[m[32m              letterSpacing: -0.5,[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m          _DetailCard([m
+[32m+[m[32m            isDark: isDark,[m
+[32m+[m
+[32m+[m[32m            children: [[m
+[32m+[m[32m              _DetailRow([m
+[32m+[m[32m                icon: Icons.category_outlined,[m
+[32m+[m[32m                title: '鍒嗙被',[m
+[32m+[m[32m                value: certificate.category,[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              _DetailDivider(isDark: isDark),[m
+[32m+[m
+[32m+[m[32m              _DetailRow([m
+[32m+[m[32m                icon: Icons.calendar_today_outlined,[m
+[32m+[m[32m                title: '鑾峰緱鏃堕棿',[m
+[32m+[m[32m                value: _formatDate(certificate.date),[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              _DetailDivider(isDark: isDark),[m
+[32m+[m
+[32m+[m[32m              _DetailRow([m
+[32m+[m[32m                icon: Icons.account_balance_outlined,[m
+[32m+[m[32m                title: '棰佸彂鏈烘瀯',[m
+[32m+[m[32m                value: certificate.organization.isEmpty[m
+[32m+[m[32m                    ? '鏈～鍐?[m
+[32m+[m[32m                    : certificate.organization,[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              _DetailDivider(isDark: isDark),[m
+[32m+[m
+[32m+[m[32m              _DetailRow([m
+[32m+[m[32m                icon: Icons.numbers_outlined,[m
+[32m+[m[32m                title: '璇佷功缂栧彿',[m
+[32m+[m[32m                value: certificate.number.isEmpty[m
+[32m+[m[32m                    ? '鏈～鍐?[m
+[32m+[m[32m                    : certificate.number,[m
+[32m+[m[32m                isDark: isDark,[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ],[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          if (certificate.note.isNotEmpty) ...[[m
+[32m+[m[32m            const SizedBox(height: 24),[m
+[32m+[m
+[32m+[m[32m            Text([m
+[32m+[m[32m              '澶囨敞',[m
+[32m+[m[32m              style: TextStyle([m
+[32m+[m[32m                fontSize: 24,[m
+[32m+[m[32m                fontWeight: FontWeight.w700,[m
+[32m+[m[32m                color: textColor,[m
+[32m+[m[32m                letterSpacing: -0.5,[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            const SizedBox(height: 12),[m
+[32m+[m
+[32m+[m[32m            _DetailCard([m
+[32m+[m[32m              isDark: isDark,[m
+[32m+[m
+[32m+[m[32m              children: [[m
+[32m+[m[32m                Text([m
+[32m+[m[32m                  certificate.note,[m
+[32m+[m[32m                  style: TextStyle([m
+[32m+[m[32m                    fontSize: 15,[m
+[32m+[m[32m                    height: 1.6,[m
+[32m+[m[32m                    color: secondaryTextColor,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ],[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ],[m
+[32m+[m
+[32m+[m[32m          const SizedBox(height: 30),[m
+[32m+[m
+[32m+[m[32m          OutlinedButton.icon([m
+[32m+[m[32m            onPressed: () {[m
+[32m+[m[32m              _edit(context);[m
+[32m+[m[32m            },[m
+[32m+[m
+[32m+[m[32m            icon: const Icon([m
+[32m+[m[32m              Icons.edit_outlined,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            label: const Text('缂栬緫璇佷功'),[m
+[32m+[m
+[32m+[m[32m            style: OutlinedButton.styleFrom([m
+[32m+[m[32m              minimumSize:[m
+[32m+[m[32m                  const Size.fromHeight(52),[m
+[32m+[m
+[32m+[m[32m              shape: RoundedRectangleBorder([m
+[32m+[m[32m                borderRadius:[m
+[32m+[m[32m                    BorderRadius.circular(18),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ],[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Detail Hero Card[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _DetailHeroCard extends StatelessWidget {[m
+[32m+[m[32m  final Certificate certificate;[m
+[32m+[m[32m  final Color primaryColor;[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m
+[32m+[m[32m  const _DetailHeroCard({[m
+[32m+[m[32m    required this.certificate,[m
+[32m+[m[32m    required this.primaryColor,[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(30),[m
+[32m+[m
+[32m+[m[32m      child: BackdropFilter([m
+[32m+[m[32m        filter: ImageFilter.blur([m
+[32m+[m[32m          sigmaX: 24,[m
+[32m+[m[32m          sigmaY: 24,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Container([m
+[32m+[m[32m          padding: const EdgeInsets.all(24),[m
+[32m+[m
+[32m+[m[32m          decoration: BoxDecoration([m
+[32m+[m[32m            color: isDark[m
+[32m+[m[32m                ? Colors.white.withValues(alpha: 0.08)[m
+[32m+[m[32m                : Colors.white.withValues(alpha: 0.82),[m
+[32m+[m
+[32m+[m[32m            borderRadius:[m
+[32m+[m[32m                BorderRadius.circular(30),[m
+[32m+[m
+[32m+[m[32m            border: Border.all([m
+[32m+[m[32m              color: isDark[m
+[32m+[m[32m                  ? Colors.white.withValues(alpha: 0.10)[m
+[32m+[m[32m                  : Colors.white.withValues(alpha: 0.85),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          child: Column([m
+[32m+[m[32m            children: [[m
+[32m+[m[32m              Container([m
+[32m+[m[32m                width: 76,[m
+[32m+[m[32m                height: 76,[m
+[32m+[m
+[32m+[m[32m                decoration: BoxDecoration([m
+[32m+[m[32m                  color: primaryColor.withValues(alpha: 0.12),[m
+[32m+[m
+[32m+[m[32m                  borderRadius:[m
+[32m+[m[32m                      BorderRadius.circular(24),[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m                child: Icon([m
+[32m+[m[32m                  _categoryIcon(certificate.category),[m
+[32m+[m[32m                  color: primaryColor,[m
+[32m+[m[32m                  size: 36,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 18),[m
+[32m+[m
+[32m+[m[32m              Text([m
+[32m+[m[32m                certificate.title,[m
+[32m+[m[32m                textAlign: TextAlign.center,[m
+[32m+[m
+[32m+[m[32m                style: TextStyle([m
+[32m+[m[32m                  fontSize: 26,[m
+[32m+[m[32m                  fontWeight: FontWeight.w800,[m
+[32m+[m[32m                  color: isDark[m
+[32m+[m[32m                      ? Colors.white[m
+[32m+[m[32m                      : const Color(0xFF1D1D1F),[m
+[32m+[m[32m                  letterSpacing: -0.8,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              if (certificate.subtitle.isNotEmpty) ...[[m
+[32m+[m[32m                const SizedBox(height: 6),[m
+[32m+[m
+[32m+[m[32m                Text([m
+[32m+[m[32m                  certificate.subtitle,[m
+[32m+[m[32m                  style: TextStyle([m
+[32m+[m[32m                    fontSize: 15,[m
+[32m+[m[32m                    color: isDark[m
+[32m+[m[32m                        ? Colors.white60[m
+[32m+[m[32m                        : Colors.black54,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ],[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 16),[m
+[32m+[m
+[32m+[m[32m              Container([m
+[32m+[m[32m                padding:[m
+[32m+[m[32m                    const EdgeInsets.symmetric([m
+[32m+[m[32m                  horizontal: 13,[m
+[32m+[m[32m                  vertical: 7,[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m                decoration: BoxDecoration([m
+[32m+[m[32m                  color: primaryColor.withValues(alpha: 0.10),[m
+[32m+[m
+[32m+[m[32m                  borderRadius:[m
+[32m+[m[32m                      BorderRadius.circular(100),[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m                child: Text([m
+[32m+[m[32m                  certificate.category,[m
+[32m+[m[32m                  style: TextStyle([m
+[32m+[m[32m                    color: primaryColor,[m
+[32m+[m[32m                    fontSize: 13,[m
+[32m+[m[32m                    fontWeight: FontWeight.w600,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ],[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Category Card[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _CategoryCard extends StatelessWidget {[m
+[32m+[m[32m  final IconData icon;[m
+[32m+[m[32m  final String title;[m
+[32m+[m[32m  final String count;[m
+[32m+[m[32m  final Color color;[m
+[32m+[m
+[32m+[m[32m  const _CategoryCard({[m
+[32m+[m[32m    required this.icon,[m
+[32m+[m[32m    required this.title,[m
+[32m+[m[32m    required this.count,[m
+[32m+[m[32m    required this.color,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    final isDark =[m
+[32m+[m[32m        Theme.of(context).brightness == Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(24),[m
+[32m+[m
+[32m+[m[32m      child: BackdropFilter([m
+[32m+[m[32m        filter: ImageFilter.blur([m
+[32m+[m[32m          sigmaX: 20,[m
+[32m+[m[32m          sigmaY: 20,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Container([m
+[32m+[m[32m          padding: const EdgeInsets.all(18),[m
+[32m+[m
+[32m+[m[32m          decoration: BoxDecoration([m
+[32m+[m[32m            color: isDark[m
+[32m+[m[32m                ? Colors.white.withValues(alpha: 0.08)[m
+[32m+[m[32m                : Colors.white.withValues(alpha: 0.72),[m
+[32m+[m
+[32m+[m[32m            borderRadius:[m
+[32m+[m[32m                BorderRadius.circular(24),[m
+[32m+[m
+[32m+[m[32m            border: Border.all([m
+[32m+[m[32m              color: isDark[m
+[32m+[m[32m                  ? Colors.white.withValues(alpha: 0.10)[m
+[32m+[m[32m                  : Colors.white.withValues(alpha: 0.9),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          child: Column([m
+[32m+[m[32m            crossAxisAlignment:[m
+[32m+[m[32m                CrossAxisAlignment.start,[m
+[32m+[m
+[32m+[m[32m            children: [[m
+[32m+[m[32m              Icon([m
+[32m+[m[32m                icon,[m
+[32m+[m[32m                size: 24,[m
+[32m+[m[32m                color: color,[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 14),[m
+[32m+[m
+[32m+[m[32m              Text([m
+[32m+[m[32m                title,[m
+[32m+[m[32m                style: TextStyle([m
+[32m+[m[32m                  fontSize: 15,[m
+[32m+[m[32m                  color: isDark[m
+[32m+[m[32m                      ? Colors.white70[m
+[32m+[m[32m                      : Colors.black54,[m
+[32m+[m[32m                  fontWeight: FontWeight.w500,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              const SizedBox(height: 2),[m
+[32m+[m
+[32m+[m[32m              Text([m
+[32m+[m[32m                count,[m
+[32m+[m[32m                style: TextStyle([m
+[32m+[m[32m                  fontSize: 30,[m
+[32m+[m[32m                  fontWeight: FontWeight.w700,[m
+[32m+[m[32m                  color: isDark[m
+[32m+[m[32m                      ? Colors.white[m
+[32m+[m[32m                      : const Color(0xFF1D1D1F),[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ],[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Certificate Card[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _CertificateCard extends StatelessWidget {[m
+[32m+[m[32m  final Certificate certificate;[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m[32m  final Color iconColor;[m
+[32m+[m[32m  final VoidCallback onTap;[m
+[32m+[m
+[32m+[m[32m  const _CertificateCard({[m
+[32m+[m[32m    required this.certificate,[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m    required this.iconColor,[m
+[32m+[m[32m    required this.onTap,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(28),[m
+[32m+[m
+[32m+[m[32m      child: BackdropFilter([m
+[32m+[m[32m        filter: ImageFilter.blur([m
+[32m+[m[32m          sigmaX: 24,[m
+[32m+[m[32m          sigmaY: 24,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Material([m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white.withValues(alpha: 0.075)[m
+[32m+[m[32m              : Colors.white.withValues(alpha: 0.82),[m
+[32m+[m
+[32m+[m[32m          child: InkWell([m
+[32m+[m[32m            onTap: onTap,[m
+[32m+[m
+[32m+[m[32m            child: Container([m
+[32m+[m[32m              padding: const EdgeInsets.all(20),[m
+[32m+[m
+[32m+[m[32m              decoration: BoxDecoration([m
+[32m+[m[32m                borderRadius:[m
+[32m+[m[32m                    BorderRadius.circular(28),[m
+[32m+[m
+[32m+[m[32m                border: Border.all([m
+[32m+[m[32m                  color: isDark[m
+[32m+[m[32m                      ? Colors.white.withValues(alpha: 0.10)[m
+[32m+[m[32m                      : Colors.white.withValues(alpha: 0.85),[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m                boxShadow: [[m
+[32m+[m[32m                  BoxShadow([m
+[32m+[m[32m                    color: Colors.black.withValues(alpha:[m[41m [m
+[32m+[m[32m                      isDark ? 0.15 : 0.04,[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                    blurRadius: 20,[m
+[32m+[m[32m                    offset: const Offset(0, 8),[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              child: Row([m
+[32m+[m[32m                crossAxisAlignment:[m
+[32m+[m[32m                    CrossAxisAlignment.start,[m
+[32m+[m
+[32m+[m[32m                children: [[m
+[32m+[m[32m                  Container([m
+[32m+[m[32m                    width: 52,[m
+[32m+[m[32m                    height: 52,[m
+[32m+[m
+[32m+[m[32m                    decoration: BoxDecoration([m
+[32m+[m[32m                      color:[m
+[32m+[m[32m                          iconColor.withValues(alpha: 0.12),[m
+[32m+[m
+[32m+[m[32m                      borderRadius:[m
+[32m+[m[32m                          BorderRadius.circular(17),[m
+[32m+[m[32m                    ),[m
+[32m+[m
+[32m+[m[32m                    child: Icon([m
+[32m+[m[32m                      _categoryIcon([m
+[32m+[m[32m                        certificate.category,[m
+[32m+[m[32m                      ),[m
+[32m+[m[32m                      color: iconColor,[m
+[32m+[m[32m                      size: 25,[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(width: 15),[m
+[32m+[m
+[32m+[m[32m                  Expanded([m
+[32m+[m[32m                    child: Column([m
+[32m+[m[32m                      crossAxisAlignment:[m
+[32m+[m[32m                          CrossAxisAlignment.start,[m
+[32m+[m
+[32m+[m[32m                      children: [[m
+[32m+[m[32m                        Text([m
+[32m+[m[32m                          certificate.title,[m
+[32m+[m[32m                          maxLines: 1,[m
+[32m+[m[32m                          overflow:[m
+[32m+[m[32m                              TextOverflow.ellipsis,[m
+[32m+[m
+[32m+[m[32m                          style: TextStyle([m
+[32m+[m[32m                            fontSize: 17,[m
+[32m+[m[32m                            fontWeight:[m
+[32m+[m[32m                                FontWeight.w700,[m
+[32m+[m[32m                            color: isDark[m
+[32m+[m[32m                                ? Colors.white[m
+[32m+[m[32m                                : const Color([m
+[32m+[m[32m                                    0xFF1D1D1F,[m
+[32m+[m[32m                                  ),[m
+[32m+[m[32m                          ),[m
+[32m+[m[32m                        ),[m
+[32m+[m
+[32m+[m[32m                        const SizedBox(height: 4),[m
+[32m+[m
+[32m+[m[32m                        if (certificate[m
+[32m+[m[32m                            .subtitle[m
+[32m+[m[32m                            .isNotEmpty)[m
+[32m+[m[32m                          Text([m
+[32m+[m[32m                            certificate.subtitle,[m
+[32m+[m[32m                            style: TextStyle([m
+[32m+[m[32m                              fontSize: 14,[m
+[32m+[m[32m                              color: isDark[m
+[32m+[m[32m                                  ? Colors.white60[m
+[32m+[m[32m                                  : Colors.black54,[m
+[32m+[m[32m                            ),[m
+[32m+[m[32m                          ),[m
+[32m+[m
+[32m+[m[32m                        const SizedBox(height: 13),[m
+[32m+[m
+[32m+[m[32m                        Row([m
+[32m+[m[32m                          children: [[m
+[32m+[m[32m                            Text([m
+[32m+[m[32m                              _formatYearMonth([m
+[32m+[m[32m                                certificate.date,[m
+[32m+[m[32m                              ),[m
+[32m+[m
+[32m+[m[32m                              style: TextStyle([m
+[32m+[m[32m                                fontSize: 13,[m
+[32m+[m[32m                                fontWeight:[m
+[32m+[m[32m                                    FontWeight.w600,[m
+[32m+[m[32m                                color: isDark[m
+[32m+[m[32m                                    ? Colors.white70[m
+[32m+[m[32m                                    : Colors.black54,[m
+[32m+[m[32m                              ),[m
+[32m+[m[32m                            ),[m
+[32m+[m
+[32m+[m[32m                            const SizedBox(width: 8),[m
+[32m+[m
+[32m+[m[32m                            Container([m
+[32m+[m[32m                              width: 3,[m
+[32m+[m[32m                              height: 3,[m
+[32m+[m
+[32m+[m[32m                              decoration:[m
+[32m+[m[32m                                  BoxDecoration([m
+[32m+[m[32m                                shape:[m
+[32m+[m[32m                                    BoxShape.circle,[m
+[32m+[m[32m                                color: isDark[m
+[32m+[m[32m                                    ? Colors.white38[m
+[32m+[m[32m                                    : Colors.black26,[m
+[32m+[m[32m                              ),[m
+[32m+[m[32m                            ),[m
+[32m+[m
+[32m+[m[32m                            const SizedBox(width: 8),[m
+[32m+[m
+[32m+[m[32m                            Expanded([m
+[32m+[m[32m                              child: Text([m
+[32m+[m[32m                                certificate.organization[m
+[32m+[m[32m                                        .isEmpty[m
+[32m+[m[32m                                    ? certificate.category[m
+[32m+[m[32m                                    : certificate[m
+[32m+[m[32m                                        .organization,[m
+[32m+[m
+[32m+[m[32m                                maxLines: 1,[m
+[32m+[m
+[32m+[m[32m                                overflow:[m
+[32m+[m[32m                                    TextOverflow[m
+[32m+[m[32m                                        .ellipsis,[m
+[32m+[m
+[32m+[m[32m                                style: TextStyle([m
+[32m+[m[32m                                  fontSize: 13,[m
+[32m+[m[32m                                  color: isDark[m
+[32m+[m[32m                                      ? Colors.white38[m
+[32m+[m[32m                                      : Colors.black38,[m
+[32m+[m[32m                                ),[m
+[32m+[m[32m                              ),[m
+[32m+[m[32m                            ),[m
+[32m+[m[32m                          ],[m
+[32m+[m[32m                        ),[m
+[32m+[m[32m                      ],[m
+[32m+[m[32m                    ),[m
+[32m+[m[32m                  ),[m
+[32m+[m
+[32m+[m[32m                  const SizedBox(width: 8),[m
+[32m+[m
+[32m+[m[32m                  Icon([m
+[32m+[m[32m                    Icons.chevron_right_rounded,[m
+[32m+[m[32m                    color: isDark[m
+[32m+[m[32m                        ? Colors.white38[m
+[32m+[m[32m                        : Colors.black26,[m
+[32m+[m[32m                    size: 24,[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Search Bar[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _SearchBar extends StatelessWidget {[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m[32m  final ValueChanged<String> onChanged;[m
+[32m+[m
+[32m+[m[32m  const _SearchBar({[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m    required this.onChanged,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(20),[m
+[32m+[m
+[32m+[m[32m      child: BackdropFilter([m
+[32m+[m[32m        filter: ImageFilter.blur([m
+[32m+[m[32m          sigmaX: 20,[m
+[32m+[m[32m          sigmaY: 20,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: TextField([m
+[32m+[m[32m          onChanged: onChanged,[m
+[32m+[m
+[32m+[m[32m          style: const TextStyle([m
+[32m+[m[32m            fontSize: 16,[m
+[32m+[m[32m          ),[m
+[32m+[m
+[32m+[m[32m          decoration: InputDecoration([m
+[32m+[m[32m            hintText: '鎼滅储璇佷功',[m
+[32m+[m
+[32m+[m[32m            prefixIcon: const Icon([m
+[32m+[m[32m              Icons.search_rounded,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            filled: true,[m
+[32m+[m
+[32m+[m[32m            fillColor: isDark[m
+[32m+[m[32m                ? Colors.white.withValues(alpha: 0.08)[m
+[32m+[m[32m                : Colors.white.withValues(alpha: 0.75),[m
+[32m+[m
+[32m+[m[32m            border: OutlineInputBorder([m
+[32m+[m[32m              borderRadius:[m
+[32m+[m[32m                  BorderRadius.circular(20),[m
+[32m+[m
+[32m+[m[32m              borderSide: BorderSide.none,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            enabledBorder: OutlineInputBorder([m
+[32m+[m[32m              borderRadius:[m
+[32m+[m[32m                  BorderRadius.circular(20),[m
+[32m+[m
+[32m+[m[32m              borderSide: BorderSide.none,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            focusedBorder: OutlineInputBorder([m
+[32m+[m[32m              borderRadius:[m
+[32m+[m[32m                  BorderRadius.circular(20),[m
+[32m+[m
+[32m+[m[32m              borderSide: BorderSide.none,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            contentPadding:[m
+[32m+[m[32m                const EdgeInsets.symmetric([m
+[32m+[m[32m              vertical: 16,[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Empty State[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _EmptyState extends StatelessWidget {[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m[32m  final VoidCallback onAdd;[m
+[32m+[m
+[32m+[m[32m  const _EmptyState({[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m    required this.onAdd,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(28),[m
+[32m+[m
+[32m+[m[32m      child: Container([m
+[32m+[m[32m        padding: const EdgeInsets.all(30),[m
+[32m+[m
+[32m+[m[32m        decoration: BoxDecoration([m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white.withValues(alpha: 0.06)[m
+[32m+[m[32m              : Colors.white.withValues(alpha: 0.72),[m
+[32m+[m
+[32m+[m[32m          borderRadius:[m
+[32m+[m[32m              BorderRadius.circular(28),[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Column([m
+[32m+[m[32m          children: [[m
+[32m+[m[32m            Icon([m
+[32m+[m[32m              Icons.workspace_premium_outlined,[m
+[32m+[m[32m              size: 48,[m
+[32m+[m[32m              color: isDark[m
+[32m+[m[32m                  ? Colors.white38[m
+[32m+[m[32m                  : Colors.black26,[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            const SizedBox(height: 16),[m
+[32m+[m
+[32m+[m[32m            const Text([m
+[32m+[m[32m              '杩樻病鏈夋壘鍒拌瘉涔?,[m
+[32m+[m[32m              style: TextStyle([m
+[32m+[m[32m                fontSize: 17,[m
+[32m+[m[32m                fontWeight: FontWeight.w700,[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            const SizedBox(height: 6),[m
+[32m+[m
+[32m+[m[32m            Text([m
+[32m+[m[32m              '鐐瑰嚮鍙充笅瑙?+ 娣诲姞浣犵殑绗竴寮犺瘉涔?,[m
+[32m+[m[32m              textAlign: TextAlign.center,[m
+[32m+[m[32m              style: TextStyle([m
+[32m+[m[32m                fontSize: 14,[m
+[32m+[m[32m                color: isDark[m
+[32m+[m[32m                    ? Colors.white54[m
+[32m+[m[32m                    : Colors.black45,[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m
+[32m+[m[32m            const SizedBox(height: 18),[m
+[32m+[m
+[32m+[m[32m            TextButton([m
+[32m+[m[32m              onPressed: onAdd,[m
+[32m+[m[32m              child: const Text('娣诲姞璇佷功'),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Form Section Title[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _SectionTitle extends StatelessWidget {[m
+[32m+[m[32m  final String title;[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m
+[32m+[m[32m  const _SectionTitle({[m
+[32m+[m[32m    required this.title,[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return Text([m
+[32m+[m[32m      title,[m
+[32m+[m[32m      style: TextStyle([m
+[32m+[m[32m        fontSize: 20,[m
+[32m+[m[32m        fontWeight: FontWeight.w700,[m
+[32m+[m[32m        color: isDark[m
+[32m+[m[32m            ? Colors.white[m
+[32m+[m[32m            : const Color(0xFF1D1D1F),[m
+[32m+[m[32m        letterSpacing: -0.4,[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Form Card[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _FormCard extends StatelessWidget {[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m[32m  final List<Widget> children;[m
+[32m+[m
+[32m+[m[32m  const _FormCard({[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m    required this.children,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(24),[m
+[32m+[m
+[32m+[m[32m      child: Container([m
+[32m+[m[32m        padding: const EdgeInsets.all(18),[m
+[32m+[m
+[32m+[m[32m        decoration: BoxDecoration([m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white.withValues(alpha: 0.075)[m
+[32m+[m[32m              : Colors.white.withValues(alpha: 0.82),[m
+[32m+[m
+[32m+[m[32m          borderRadius:[m
+[32m+[m[32m              BorderRadius.circular(24),[m
+[32m+[m
+[32m+[m[32m          border: Border.all([m
+[32m+[m[32m            color: isDark[m
+[32m+[m[32m                ? Colors.white.withValues(alpha: 0.10)[m
+[32m+[m[32m                : Colors.white.withValues(alpha: 0.85),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Column([m
+[32m+[m[32m          children: children,[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Text Field[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _TextField extends StatelessWidget {[m
+[32m+[m[32m  final TextEditingController controller;[m
+[32m+[m[32m  final String label;[m
+[32m+[m[32m  final String hint;[m
+[32m+[m[32m  final IconData icon;[m
+[32m+[m[32m  final int maxLines;[m
+[32m+[m[32m  final String? Function(String?)? validator;[m
+[32m+[m
+[32m+[m[32m  const _TextField({[m
+[32m+[m[32m    required this.controller,[m
+[32m+[m[32m    required this.label,[m
+[32m+[m[32m    required this.hint,[m
+[32m+[m[32m    required this.icon,[m
+[32m+[m[32m    this.maxLines = 1,[m
+[32m+[m[32m    this.validator,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return TextFormField([m
+[32m+[m[32m      controller: controller,[m
+[32m+[m
+[32m+[m[32m      maxLines: maxLines,[m
+[32m+[m
+[32m+[m[32m      validator: validator,[m
+[32m+[m
+[32m+[m[32m      decoration: InputDecoration([m
+[32m+[m[32m        labelText: label,[m
+[32m+[m[32m        hintText: hint,[m
+[32m+[m
+[32m+[m[32m        prefixIcon: Icon(icon),[m
+[32m+[m
+[32m+[m[32m        border: OutlineInputBorder([m
+[32m+[m[32m          borderRadius:[m
+[32m+[m[32m              BorderRadius.circular(18),[m
+[32m+[m
+[32m+[m[32m          borderSide: BorderSide.none,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        enabledBorder: OutlineInputBorder([m
+[32m+[m[32m          borderRadius:[m
+[32m+[m[32m              BorderRadius.circular(18),[m
+[32m+[m
+[32m+[m[32m          borderSide: BorderSide.none,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        focusedBorder: OutlineInputBorder([m
+[32m+[m[32m          borderRadius:[m
+[32m+[m[32m              BorderRadius.circular(18),[m
+[32m+[m
+[32m+[m[32m          borderSide: BorderSide.none,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        filled: true,[m
+[32m+[m
+[32m+[m[32m        fillColor:[m
+[32m+[m[32m            Theme.of(context).brightness ==[m
+[32m+[m[32m                    Brightness.dark[m
+[32m+[m[32m                ? Colors.white.withValues(alpha: 0.06)[m
+[32m+[m[32m                : Colors.black.withValues(alpha: 0.035),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Detail Card[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _DetailCard extends StatelessWidget {[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m[32m  final List<Widget> children;[m
+[32m+[m
+[32m+[m[32m  const _DetailCard({[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m    required this.children,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(24),[m
+[32m+[m
+[32m+[m[32m      child: Container([m
+[32m+[m[32m        padding: const EdgeInsets.all(20),[m
+[32m+[m
+[32m+[m[32m        decoration: BoxDecoration([m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white.withValues(alpha: 0.075)[m
+[32m+[m[32m              : Colors.white.withValues(alpha: 0.82),[m
+[32m+[m
+[32m+[m[32m          borderRadius:[m
+[32m+[m[32m              BorderRadius.circular(24),[m
+[32m+[m
+[32m+[m[32m          border: Border.all([m
+[32m+[m[32m            color: isDark[m
+[32m+[m[32m                ? Colors.white.withValues(alpha: 0.10)[m
+[32m+[m[32m                : Colors.white.withValues(alpha: 0.85),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Column([m
+[32m+[m[32m          children: children,[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Detail Row[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _DetailRow extends StatelessWidget {[m
+[32m+[m[32m  final IconData icon;[m
+[32m+[m[32m  final String title;[m
+[32m+[m[32m  final String value;[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m
+[32m+[m[32m  const _DetailRow({[m
+[32m+[m[32m    required this.icon,[m
+[32m+[m[32m    required this.title,[m
+[32m+[m[32m    required this.value,[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return Row([m
+[32m+[m[32m      crossAxisAlignment:[m
+[32m+[m[32m          CrossAxisAlignment.start,[m
+[32m+[m
+[32m+[m[32m      children: [[m
+[32m+[m[32m        Icon([m
+[32m+[m[32m          icon,[m
+[32m+[m[32m          size: 22,[m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white54[m
+[32m+[m[32m              : Colors.black45,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        const SizedBox(width: 14),[m
+[32m+[m
+[32m+[m[32m        SizedBox([m
+[32m+[m[32m          width: 75,[m
+[32m+[m
+[32m+[m[32m          child: Text([m
+[32m+[m[32m            title,[m
+[32m+[m[32m            style: TextStyle([m
+[32m+[m[32m              fontSize: 14,[m
+[32m+[m[32m              color: isDark[m
+[32m+[m[32m                  ? Colors.white54[m
+[32m+[m[32m                  : Colors.black45,[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        const SizedBox(width: 12),[m
+[32m+[m
+[32m+[m[32m        Expanded([m
+[32m+[m[32m          child: Text([m
+[32m+[m[32m            value,[m
+[32m+[m[32m            textAlign: TextAlign.right,[m
+[32m+[m
+[32m+[m[32m            style: TextStyle([m
+[32m+[m[32m              fontSize: 15,[m
+[32m+[m[32m              fontWeight: FontWeight.w600,[m
+[32m+[m[32m              color: isDark[m
+[32m+[m[32m                  ? Colors.white[m
+[32m+[m[32m                  : const Color(0xFF1D1D1F),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ],[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Detail Divider[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _DetailDivider extends StatelessWidget {[m
+[32m+[m[32m  final bool isDark;[m
+[32m+[m
+[32m+[m[32m  const _DetailDivider({[m
+[32m+[m[32m    required this.isDark,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return Padding([m
+[32m+[m[32m      padding: const EdgeInsets.symmetric([m
+[32m+[m[32m        vertical: 16,[m
+[32m+[m[32m      ),[m
+[32m+[m
+[32m+[m[32m      child: Divider([m
+[32m+[m[32m        height: 1,[m
+[32m+[m[32m        color: isDark[m
+[32m+[m[32m            ? Colors.white.withValues(alpha: 0.08)[m
+[32m+[m[32m            : Colors.black.withValues(alpha: 0.06),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Glass Button[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _GlassButton extends StatelessWidget {[m
+[32m+[m[32m  final IconData icon;[m
+[32m+[m[32m  final VoidCallback onTap;[m
+[32m+[m
+[32m+[m[32m  const _GlassButton({[m
+[32m+[m[32m    required this.icon,[m
+[32m+[m[32m    required this.onTap,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    final isDark =[m
+[32m+[m[32m        Theme.of(context).brightness ==[m
+[32m+[m[32m            Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(16),[m
+[32m+[m
+[32m+[m[32m      child: BackdropFilter([m
+[32m+[m[32m        filter: ImageFilter.blur([m
+[32m+[m[32m          sigmaX: 20,[m
+[32m+[m[32m          sigmaY: 20,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Material([m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white.withValues(alpha: 0.10)[m
+[32m+[m[32m              : Colors.white.withValues(alpha: 0.65),[m
+[32m+[m
+[32m+[m[32m          child: InkWell([m
+[32m+[m[32m            onTap: onTap,[m
+[32m+[m
+[32m+[m[32m            child: SizedBox([m
+[32m+[m[32m              width: 42,[m
+[32m+[m[32m              height: 42,[m
+[32m+[m
+[32m+[m[32m              child: Icon([m
+[32m+[m[32m                icon,[m
+[32m+[m[32m                size: 21,[m
+[32m+[m[32m                color: isDark[m
+[32m+[m[32m                    ? Colors.white[m
+[32m+[m[32m                    : const Color(0xFF1D1D1F),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Glass Add Button[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mclass _GlassAddButton extends StatelessWidget {[m
+[32m+[m[32m  final Color primaryColor;[m
+[32m+[m[32m  final VoidCallback onTap;[m
+[32m+[m
+[32m+[m[32m  const _GlassAddButton({[m
+[32m+[m[32m    required this.primaryColor,[m
+[32m+[m[32m    required this.onTap,[m
+[32m+[m[32m  });[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    final isDark =[m
+[32m+[m[32m        Theme.of(context).brightness ==[m
+[32m+[m[32m            Brightness.dark;[m
+[32m+[m
+[32m+[m[32m    return ClipRRect([m
+[32m+[m[32m      borderRadius: BorderRadius.circular(22),[m
+[32m+[m
+[32m+[m[32m      child: BackdropFilter([m
+[32m+[m[32m        filter: ImageFilter.blur([m
+[32m+[m[32m          sigmaX: 24,[m
+[32m+[m[32m          sigmaY: 24,[m
+[32m+[m[32m        ),[m
+[32m+[m
+[32m+[m[32m        child: Material([m
+[32m+[m[32m          color: isDark[m
+[32m+[m[32m              ? Colors.white.withValues(alpha: 0.12)[m
+[32m+[m[32m              : Colors.white.withValues(alpha: 0.80),[m
+[32m+[m
+[32m+[m[32m          child: InkWell([m
+[32m+[m[32m            onTap: onTap,[m
+[32m+[m
+[32m+[m[32m            child: Container([m
+[32m+[m[32m              width: 62,[m
+[32m+[m[32m              height: 62,[m
+[32m+[m
+[32m+[m[32m              decoration: BoxDecoration([m
+[32m+[m[32m                borderRadius:[m
+[32m+[m[32m                    BorderRadius.circular(22),[m
+[32m+[m
+[32m+[m[32m                border: Border.all([m
+[32m+[m[32m                  color: isDark[m
+[32m+[m[32m                      ? Colors.white.withValues(alpha: 0.12)[m
+[32m+[m[32m                      : Colors.white,[m
+[32m+[m[32m                ),[m
+[32m+[m
+[32m+[m[32m                boxShadow: [[m
+[32m+[m[32m                  BoxShadow([m
+[32m+[m[32m                    color:[m
+[32m+[m[32m                        primaryColor.withValues(alpha: 0.18),[m
+[32m+[m[32m                    blurRadius: 20,[m
+[32m+[m[32m                    offset: const Offset(0, 8),[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                ],[m
+[32m+[m[32m              ),[m
+[32m+[m
+[32m+[m[32m              child: Icon([m
+[32m+[m[32m                Icons.add_rounded,[m
+[32m+[m[32m                size: 30,[m
+[32m+[m[32m                color: primaryColor,[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m          ),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m    );[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m// ============================================================[m
+[32m+[m[32m// Utilities[m
+[32m+[m[32m// ============================================================[m
+[32m+[m
+[32m+[m[32mString _formatDate(DateTime date) {[m
+[32m+[m[32m  return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mString _formatYearMonth(DateTime date) {[m
+[32m+[m[32m  return '${date.year}.${date.month.toString().padLeft(2, '0')}';[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mIconData _categoryIcon(String category) {[m
+[32m+[m[32m  switch (category) {[m
+[32m+[m[32m    case '鑻辫':[m
+[32m+[m[32m      return Icons.language_rounded;[m
+[32m+[m
+[32m+[m[32m    case '璁＄畻鏈?:[m
+[32m+[m[32m      return Icons.computer_rounded;[m
+[32m+[m
+[32m+[m[32m    case '涓撲笟':[m
+[32m+[m[32m      return Icons.school_rounded;[m
+[32m+[m
+[32m+[m[32m    default:[m
+[32m+[m[32m      return Icons.workspace_premium_rounded;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m

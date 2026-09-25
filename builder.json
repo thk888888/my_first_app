@@ -6,6 +6,13 @@
     "repo": "my_first_app"
   },
   "provider": "github",
+  "defaultProfile": "release",
+  "profiles": {
+    "release": {
+      "name": "release",
+      "configuration": "Release"
+    }
+  },
   "codemagic": {},
   "bitrise": {},
   "ios": {},

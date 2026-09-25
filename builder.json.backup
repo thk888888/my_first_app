@@ -1,0 +1,19 @@
+{
+  "project": "my_first_app",
+  "platform": "ios",
+  "github": {
+    "owner": "thk888888",
+    "repo": "my_first_app"
+  },
+  "provider": "github",
+  "codemagic": {},
+  "bitrise": {},
+  "ios": {},
+  "flutter": {
+    "version": "3.47.5",
+    "watch": {}
+  },
+  "reactNative": {},
+  "kmp": {},
+  "mobai": {}
+}
